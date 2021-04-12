@@ -1,0 +1,173 @@
+{
+  "countries": [
+    "China",
+    "India",
+    "UK",
+    "Australia"
+  ],
+  "products": [
+    {
+      "id": 1,
+      "category": "shoes",
+      "image": "shoe1.jpg",
+      "name": "Hiker",
+      "price": 94.95,
+      "skus": [
+        {
+          "sku": "17",
+          "size": "7",
+          "skuDesc": ""
+        },
+        {
+          "sku": "18",
+          "size": "8",
+          "skuDesc": ""
+        }
+      ],
+      "description": "This rugged boot will get you up the mountain safely."
+    },
+    {
+      "id": 2,
+      "category": "shoes",
+      "image": "shoe2.jpg",
+      "name": "Climber",
+      "price": 78.99,
+      "skus": [
+        {
+          "sku": "28",
+          "size": "8",
+          "skuDesc": ""
+        },
+        {
+          "sku": "29",
+          "size": "9",
+          "skuDesc": ""
+        }
+      ],
+      "description": "Sure-footed traction in slippery conditions."
+    },
+    {
+      "id": 3,
+      "category": "shoes",
+      "image": "shoe3.jpg",
+      "name": "Explorer",
+      "price": 145.95,
+      "skus": [
+        {
+          "sku": "37",
+          "size": "7",
+          "skuDesc": ""
+        },
+        {
+          "sku": "38",
+          "size": "8",
+          "skuDesc": ""
+        },
+        {
+          "sku": "39",
+          "size": "9",
+          "skuDesc": ""
+        }
+      ],
+      "description": "Look stylish while stomping in the mud."
+    },
+    {
+      "id": 11,
+      "category": "backpacks",
+      "image": "backpack1.jpg",
+      "name": "Orangy1",
+      "price": 120.95,
+      "skus": [
+        {
+          "sku": "b1",
+          "size": "Medium",
+          "skuDesc": "90 x 25 x 15 cm"
+        },
+        {
+          "sku": "b2",
+          "size": "Large",
+          "skuDesc": "100 x 35 x 25 cm"
+        }
+      ],
+      "description": "This rugged bag will hold all your stuff."
+    },
+    {
+      "id": 12,
+      "category": "backpacks",
+      "image": "backpack2.jpg",
+      "name": "Tasseled",
+      "price": 195.95,
+      "skus": [
+        {
+          "sku": "b3",
+          "size": "Medium",
+          "skuDesc": "90 x 25 x 15 cm"
+        },
+        {
+          "sku": "b4",
+          "size": "Large",
+          "skuDesc": "100 x 35 x 25 cm"
+        }
+      ],
+      "description": "This pro-bag will hold all your stuff."
+    }
+  ],
+  "shippingAddress": [
+    {
+      "transId": "b380ee8c-974a-4e3e-83c8-a9c2495da72d",
+      "name": "Andrew James McAlister",
+      "email": "andrew_mcalister@hotmail.com",
+      "address1": "2 Pluto Pl",
+      "address2": "",
+      "citysuburb": "Hoppers Crossing",
+      "state": "VIC",
+      "country": "Australia",
+      "id": 1
+    },
+    {
+      "transId": "14b3bf44-4ef4-4ef7-ab45-8bf6f5ae12a4",
+      "name": "Andrew James McAlister",
+      "email": "andrew_mcalister@hotmail.com",
+      "address1": "2 Pluto Pl",
+      "address2": "",
+      "citysuburb": "Hoppers Crossing",
+      "state": "VIC",
+      "country": "Australia",
+      "id": 2
+    }
+  ],
+  "payments": [],
+  "orders": [
+    {
+      "transId": "b380ee8c-974a-4e3e-83c8-a9c2495da72d",
+      "cart": [
+        {
+          "id": "11",
+          "sku": "b1",
+          "quantity": 1
+        }
+      ],
+      "orderDate": "Mon Apr 12 2021 09:20:24 GMT+1000 (Australian Eastern Standard Time)",
+      "status": "PAYMENTPENDING",
+      "id": 1
+    },
+    {
+      "transId": "14b3bf44-4ef4-4ef7-ab45-8bf6f5ae12a4",
+      "cart": [
+        {
+          "id": "12",
+          "sku": "b3",
+          "quantity": 1
+        },
+        {
+          "id": "2",
+          "sku": "29",
+          "quantity": 1
+        }
+      ],
+      "orderDate": "Mon Apr 12 2021 09:26:32 GMT+1000 (Australian Eastern Standard Time)",
+      "status": "PAYMENTPENDING",
+      "id": 2
+    }
+  ]
+}
