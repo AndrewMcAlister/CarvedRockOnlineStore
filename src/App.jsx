@@ -10,6 +10,7 @@ import Checkout from './Checkout';
 import { useCart } from './cartContext';
 import Payment from './Payment';
 import LandingPage from './LandingPage';
+import Tweets from './Tweets';
 
 export default function App() {
   const { dispatch } = useCart();
@@ -24,6 +25,7 @@ export default function App() {
             <Route path="/:category/:id" element={<Detail />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/payment/:transId" element={<Payment />} />
+            <Route path="/tweets" element={<Tweets />} />
             <Route
               path="/checkout"
               element={<Checkout dispatch={dispatch} />}

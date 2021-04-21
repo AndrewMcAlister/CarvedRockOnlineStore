@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import InputMask from 'react-input-mask';
 import useFetchAll from './services/useFetchAll';
 import Spinner from './Spinner';
-import { saveOrder, getOrderByTransId } from './services/orderService';
+import { saveOrder } from './services/orderService';
 
 const flatRateShipping = 15;
 const taxPercent = 10;

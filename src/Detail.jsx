@@ -10,12 +10,12 @@ export default function Detail() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [sku, setSku] = useState('');
-  const { data: product, loading, error } = useFetch(`products/${id}`);
 
-  if (loading) return <Spinner />;
-  if (!product) return <PageNotFound />;
+  const { data: product, error } = useFetch(`products/${id}`);
+
+  if (!product) return <Spinner />;
+  if (!product && error) return <PageNotFound />;
   if (error) throw error;
-
   return (
     <div id="detail">
       <h1>{product.name}</h1>

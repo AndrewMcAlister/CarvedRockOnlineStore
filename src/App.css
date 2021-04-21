@@ -93,6 +93,24 @@ header li {
   height: 150px;
 }
 
+#tweets img {
+  width:40px;
+  padding: 1px;
+  border: 1px;
+  margin: 1px;
+}
+
+#tweets .actionMessage {
+  font-size:x-small; 
+}
+
+.tight {
+  padding-left: 3px !important;
+  padding-right: 3px !important;
+  padding-top: 1px !important;
+  padding-bottom: 1px !important;
+}
+
 #cart ul {
   padding: 0;
   list-style-type: none;

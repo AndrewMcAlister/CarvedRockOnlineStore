@@ -4,14 +4,13 @@ import useFetch from './services/useFetch';
 import { useParams } from 'react-router-dom';
 import PageNotFound from './PageNotFound';
 import { Link } from 'react-router-dom';
+import useSWR from 'swr';
 
 export default function Products() {
   const [size, setSize] = useState('');
   const { category } = useParams();
 
-  const { data: products, loading, error } = useFetch(
-    'products?category=' + category,
-  );
+  const {data: products, error} = useSWR('products?category=' + category,useFetch());
 
   function renderProduct(p) {
     return (
@@ -41,7 +40,7 @@ export default function Products() {
     : products;
 
   if (error) throw error;
-  if (loading) return <Spinner />;
+  if (!products) return <Spinner />;
   if (products.length === 0) return <PageNotFound />;
 
   return (
@@ -56,9 +55,6 @@ export default function Products() {
           }}
         >
           <option value="">All sizes</option>
-          {/* <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option> */}
           {getSizes().map((s) => (
             <option key={s} value={`${s}`}>
               {s}

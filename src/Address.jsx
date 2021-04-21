@@ -1,51 +1,27 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import { saveShippingAddress } from './services/shippingService';
 import useFetch from './services/useFetch';
 import Spinner from './Spinner';
 import { v4 as uuidv4 } from 'uuid';
+import { CHECKOUT_STATUS } from './CheckoutStatus';
 
-const STATUS = {
-  IDLE: 'IDLE',
-  SUBMITTED: 'SUBMITTED',
-  SUBMITTING: 'SUBMITTING',
-  COMPLETED: 'COMPLETED',
-};
+function getErrors(address) {
+  const result = {};
+  if (!address.name) result.name = 'Name is required';
+  if (!address.email) result.email = 'Email is required';
+  if (!address.address1) result.address1 = 'Address 1 is required';
+  if (!address.citysuburb) result.citysuburb = 'City or suburb is required';
+  if (!address.state) result.state = 'State is required';
+  if (!address.country) result.country = 'Country is required';
+  return result;
+}
 
-// Declaring outside component to avoid recreation on each render
-const emptyAddress = {
-  transId: '',
-  name: '',
-  email: '',
-  address1: '',
-  address2: '',
-  citysuburb: '',
-  state: '',
-  country: '',
-};
-
-const initialAddress = () => {
-  return JSON.parse(localStorage.getItem('address')) ?? emptyAddress;
-};
-
-export default function Checkout() {
-  const [address, setAddress] = useState(initialAddress);
-  const [status, setStatus] = useState(STATUS.IDLE);
-  const [saveError, setSaveError] = useState(null);
+export default function Address({ address, setAddress, status, setStatus }) {
   const [touched, setTouched] = useState({});
-  const navigate = useNavigate();
-
-  // Derived state
-  const errors = getErrors(address);
-  const isValid = Object.keys(errors).length === 0;
-
+  const [saveError, setSaveError] = useState(null); 
   const { data: countries, countriesLoading, countriesError } = useFetch(
     'countries',
   );
-
-  useEffect(() => localStorage.setItem('address', JSON.stringify(address)), [
-    address,
-  ]);
 
   function handleChange(e) {
     e.persist(); // persist the event
@@ -64,47 +40,33 @@ export default function Checkout() {
     });
   }
 
+  // Derived state
+  const errors = getErrors(address);
+  const isValid = Object.keys(errors).length === 0;
+
   async function handleSubmit(event) {
     event.preventDefault();
-    setStatus(STATUS.SUBMITTING);
+    setStatus(CHECKOUT_STATUS.ADDRESS_SUBMITTING);
     if (isValid) {
       try {
         const transId = uuidv4();
         address.transId = transId;
         await saveShippingAddress(address);
-        navigate(`/payment/${transId}`);
-        setStatus(STATUS.COMPLETED);
+        setStatus(CHECKOUT_STATUS.ADDRESS_SUBMITTED);
       } catch (e) {
         setSaveError(e);
       }
-    } else {
-      setStatus(STATUS.SUBMITTED);
     }
   }
 
-  function getErrors(address) {
-    const result = {};
-    if (!address.name) result.name = 'Name is required';
-    if (!address.email) result.email = 'Email is required';
-    if (!address.address1) result.address1 = 'Address 1 is required';
-    if (!address.citysuburb) result.citysuburb = 'City or suburb is required';
-    if (!address.state) result.state = 'State is required';
-    if (!address.country) result.country = 'Country is required';
-    return result;
-  }
-
   if (saveError) throw saveError;
-  if (status === STATUS.COMPLETED) {
-    return <h1>Thanks for shopping checkout!</h1>;
-  }
-
   if (countriesLoading) return <Spinner />;
   if (countriesError) throw countriesError;
 
   return (
     <>
       <h1>Shipping Info</h1>
-      {!isValid && status === STATUS.SUBMITTED && (
+      {!isValid && status === CHECKOUT_STATUS.ADDRESS_SUBMITTING && (
         <div role="alert">
           <p>Please fix the following errors:</p>
           <ul>
@@ -126,7 +88,8 @@ export default function Checkout() {
             onChange={handleChange}
           />
           <p role="alert">
-            {(touched.name || status === STATUS.SUBMITTED) && errors.name}
+            {(touched.name || status === CHECKOUT_STATUS.ADDRESS_SUBMITTING) &&
+              errors.name}
           </p>
         </div>
         <div>
@@ -140,7 +103,8 @@ export default function Checkout() {
             onChange={handleChange}
           />
           <p role="alert">
-            {(touched.email || status === STATUS.SUBMITTED) && errors.email}
+            {(touched.email || status === CHECKOUT_STATUS.ADDRESS_SUBMITTING) &&
+              errors.email}
           </p>
         </div>
         <div>
@@ -154,7 +118,8 @@ export default function Checkout() {
             onChange={handleChange}
           />
           <p role="alert">
-            {(touched.line1 || status === STATUS.SUBMITTED) && errors.line1}
+            {(touched.line1 || status === CHECKOUT_STATUS.ADDRESS_SUBMITTING) &&
+              errors.line1}
           </p>
         </div>
         <div>
@@ -168,7 +133,8 @@ export default function Checkout() {
             onChange={handleChange}
           />
           <p role="alert">
-            {(touched.line2 || status === STATUS.SUBMITTED) && errors.line2}
+            {(touched.line2 || status === CHECKOUT_STATUS.ADDRESS_SUBMITTING) &&
+              errors.line2}
           </p>
         </div>
         <div>
@@ -177,12 +143,13 @@ export default function Checkout() {
           <input
             id="citysuburb"
             type="text"
-            value={address.citysuburb}
+            value={address.city}
             onBlur={handleBlur}
             onChange={handleChange}
           />
           <p role="alert">
-            {(touched.citysuburb || status === STATUS.SUBMITTED) &&
+            {(touched.citysuburb ||
+              status === CHECKOUT_STATUS.ADDRESS_SUBMITTING) &&
               errors.citysuburb}
           </p>
         </div>
@@ -197,7 +164,8 @@ export default function Checkout() {
             onChange={handleChange}
           />
           <p role="alert">
-            {(touched.state || status === STATUS.SUBMITTED) && errors.state}
+            {(touched.state || status === CHECKOUT_STATUS.ADDRESS_SUBMITTING) &&
+              errors.state}
           </p>
         </div>
         <div>
@@ -219,7 +187,9 @@ export default function Checkout() {
           </select>
 
           <p role="alert">
-            {(touched.country || status === STATUS.SUBMITTED) && errors.country}
+            {(touched.country ||
+              status === CHECKOUT_STATUS.ADDRESS_SUBMITTING) &&
+              errors.country}
           </p>
         </div>
         <div>
@@ -227,7 +197,7 @@ export default function Checkout() {
             type="submit"
             className="btn btn-primary"
             value="Save Shipping Info"
-            disabled={status === STATUS.SUBMITTING}
+            disabled={status === CHECKOUT_STATUS.ADDRESS_SUBMITTING}
           />
         </div>
       </form>

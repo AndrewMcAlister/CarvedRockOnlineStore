@@ -35,7 +35,6 @@ export async function saveOrder(cart, transId) {
   } catch (e) {
     console.log(e);
   }
-  
-  console.log('Order Id is : ' + orderId);
+
   return orderId;
 }
