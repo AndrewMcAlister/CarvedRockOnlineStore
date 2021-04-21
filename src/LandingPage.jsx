@@ -23,7 +23,10 @@ export default function LandingPage() {
                 holds the state and there are address and payment components.
               </li>
               <li>
-                A 5 sec delay to product retrieval has been added to show SWR caching in use (but not on cart)
+                I have added SWR caching, and a 1 sec delay to product retrieval to show highligh caching (but not on cart).
+              </li>
+              <li>
+                I have added random customer purchase tweets
               </li>
             </ul>
           </h3>

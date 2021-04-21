@@ -219,95 +219,11 @@
   ],
   "tweets": [
     {
-      "name": "Olivia",
-      "image": "Olivia.jpg",
-      "date": 1618994108452,
-      "actionMessage": "Olivia purchased a Hiker shoe",
-      "id": 208
-    },
-    {
-      "name": "Simon",
-      "image": "Simon.jpg",
-      "date": 1618994113441,
-      "actionMessage": "Simon purchased a Tasseled-pro backpack",
-      "id": 209
-    },
-    {
-      "name": "Mariko",
-      "image": "Mariko.jpg",
-      "date": 1618994118448,
-      "actionMessage": "Mariko purchased a Climber shoe",
-      "id": 210
-    },
-    {
-      "name": "Steven",
-      "image": "Steven.jpg",
-      "date": 1618994123445,
-      "actionMessage": "Steven purchased a Orangy1 backpack",
-      "id": 211
-    },
-    {
-      "name": "Olivia",
-      "image": "Olivia.jpg",
-      "date": 1618994128451,
-      "actionMessage": "Olivia purchased a Orangy1 backpack",
-      "id": 212
-    },
-    {
-      "name": "Mariko",
-      "image": "Mariko.jpg",
-      "date": 1618994133456,
-      "actionMessage": "Mariko purchased a Explorer shoe",
-      "id": 213
-    },
-    {
       "name": "Steven",
       "image": "Steven.jpg",
       "date": 1618994167450,
       "actionMessage": "Steven purchased a Climber shoe",
       "id": 219
-    },
-    {
-      "name": "Andrew",
-      "image": "Andrew.jpg",
-      "date": 1618994172449,
-      "actionMessage": "Andrew purchased a Explorer shoe",
-      "id": 220
-    },
-    {
-      "name": "Simon",
-      "image": "Simon.jpg",
-      "date": 1618994177450,
-      "actionMessage": "Simon purchased a Orangy1 backpack",
-      "id": 221
-    },
-    {
-      "name": "Simon",
-      "image": "Simon.jpg",
-      "date": 1618994182458,
-      "actionMessage": "Simon purchased a Tasseled backpack",
-      "id": 222
-    },
-    {
-      "name": "Mariko",
-      "image": "Mariko.jpg",
-      "date": 1618994187450,
-      "actionMessage": "Mariko purchased a Explorer shoe",
-      "id": 223
-    },
-    {
-      "name": "Somebody",
-      "image": "Somebody.jpg",
-      "date": 1618994192445,
-      "actionMessage": "Somebody purchased a Tasseled backpack",
-      "id": 224
-    },
-    {
-      "name": "Somebody",
-      "image": "Somebody.jpg",
-      "date": 1618994197454,
-      "actionMessage": "Somebody purchased a Orangy1 backpack",
-      "id": 225
     },
     {
       "name": "Simon",
@@ -385,6 +301,13 @@
       "date": 1618994343352,
       "actionMessage": "Mariko purchased a Orangy1 backpack",
       "id": 236
+    },
+    {
+      "name": "Andrew",
+      "image": "Andrew.jpg",
+      "date": 1618994876447,
+      "actionMessage": "Andrew purchased a Climber shoe",
+      "id": 237
     }
   ]
 }
