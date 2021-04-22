@@ -149,10 +149,8 @@
   ],
   "shippingAddress": [
   ],
-  "payments": [
-  ],
-  "orders": [
-  ],
+  "payments": [],
+  "orders": [],
   "tweets": [
     {
       "name": "Simon",
