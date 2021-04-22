@@ -1,23 +1,21 @@
-import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import React from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import { useCart } from './cartContext';
 
 const activeStyle = {
-  color: "purple",
+  color: 'purple',
 };
 
 export default function Header() {
-  const {cart} = useCart();  
+  const { cart } = useCart();
 
   const cartQty = () => {
-    let totqty=0;
+    let totqty = 0;
     if (cart.length > 0) {
-      totqty = cart.reduce(
-        (totqty, item) =>
-        totqty + item.quantity,0)
+      totqty = cart.reduce((totqty, item) => totqty + item.quantity, 0);
     }
     return totqty;
-  }  
+  };
 
   return (
     <header>
@@ -29,10 +27,15 @@ export default function Header() {
             </Link>
           </li>
           <li>
+            <NavLink activeStyle={activeStyle} to="/">
+              Home
+            </NavLink>
+          </li>
+          <li>
             <NavLink activeStyle={activeStyle} to="/backpacks">
               Backpacks
             </NavLink>
-          </li>          
+          </li>
           <li>
             <NavLink activeStyle={activeStyle} to="/shoes">
               Shoes

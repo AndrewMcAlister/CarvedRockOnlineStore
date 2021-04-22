@@ -9,7 +9,7 @@ export const ORDER_STATUS = {
 
 export async function getOrderByTransId(transId) {
   const response = await fetch(baseUrl + 'orders?transId=' + transId);
-  if (response.ok) return response.json();
+  if (response.ok) return await response.json();
   throw response;
 }
 

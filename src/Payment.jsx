@@ -6,17 +6,10 @@ import InputMask from 'react-input-mask';
 import useFetchAll from './services/useFetchAll';
 import Spinner from './Spinner';
 import { saveOrder } from './services/orderService';
+import {CHECKOUT_STATUS} from './CheckoutStatus';
 
 const flatRateShipping = 15;
 const taxPercent = 10;
-
-const STATUS = {
-  IDLE: 'IDLE',
-  SUBMITTED: 'SUBMITTED',
-  SUBMITTING: 'SUBMITTING',
-  COMPLETED: 'COMPLETED',
-  FAILED: 'FAILED',
-};
 
 // Declaring outside component to avoid recreation on each render
 const emptyPayment = {
@@ -32,7 +25,7 @@ const emptyPayment = {
 
 export default function Payment() {
   const [touched, setTouched] = useState({});
-  const [status, setStatus] = useState(STATUS.IDLE);
+  const [status, setStatus] = useState();
   const [saveError, setSaveError] = useState(null);
   const { cart, dispatch } = useCart();
   const urls = cart.map((i) => `products/${i.id}`);
@@ -40,7 +33,6 @@ export default function Payment() {
   const { transId } = useParams();
   const [payment, setPayment] = useState({ ...emptyPayment, transId: transId });
   const [orderId, setOrderId] = useState('');
-  //  const [cart, dispatch] = useReducer(cartReducer, initialCart);
 
   function calcCartTotals(cart, u) {
     let totals = {
@@ -106,24 +98,26 @@ export default function Payment() {
   async function handleSubmit(event) {
     event.preventDefault();
     setPayment({ ...payment, transId: transId });
-    setStatus(STATUS.SUBMITTING);
+    setStatus(CHECKOUT_STATUS.PAYMENT_SUBMITTING);
     if (isValid) {
       try {
         if (cart.length > 0) {
           await savePayment(payment);
-          let orderId= await saveOrder(cart, transId);
-          if (orderId>0) {
+          let orderId = await saveOrder(cart, transId);
+          if (orderId > 0) {
             setOrderId(orderId);
-            setStatus(STATUS.COMPLETED);
+            setStatus(CHECKOUT_STATUS.ORDER_COMPLETED);
             dispatch({ type: 'empty' });
-          }
-          else throw new Error("Sorry, an order number couldn't be generated, we will send it later.");
+          } else
+          {
+            setStatus(CHECKOUT_STATUS.ORDER_SUBMITTED);
+            throw new Error(
+              "Sorry, an order number couldn't be generated, we will send it later.",
+            );}
         }
       } catch (e) {
         setSaveError(e);
       }
-    } else {
-      setStatus(STATUS.SUBMITTED);
     }
   }
 
@@ -152,8 +146,12 @@ export default function Payment() {
   }
 
   if (saveError) throw saveError;
-  if (status === STATUS.COMPLETED && orderId) {
-    return <h1>Your order Id is {orderId}.<br/> Thanks for shopping!</h1>;
+  if (status === CHECKOUT_STATUS.ORDER_COMPLETED && orderId) {
+    return (
+      <h1>
+        Your order Id is {orderId}.<br /> Thanks for shopping!
+      </h1>
+    );
   }
 
   if (productsloading) return <Spinner />;
@@ -162,7 +160,6 @@ export default function Payment() {
   return (
     <>
       <h1>Payment Info</h1>
-      <p>Transaction Id: {transId}</p>
       <table>
         <thead>
           <tr>
@@ -206,113 +203,115 @@ export default function Payment() {
         </tbody>
       </table>
       <br />
-      <form onSubmit={handleSubmit} className="row col-md-6">
-        <div className="form-group col-md-12">
-          <label htmlFor="paymentType">Payment Type</label>
-          <br />
-          <select
-            id="paymentType"
-            value={payment.paymentType}
-            onBlur={handleBlur}
-            onChange={handleChange}
-          >
-            <option value="">Select...</option>
-            <option value="PayPal">PayPal</option>
-            <option default value="CreditCard">
-              Credit Card
-            </option>
-          </select>
-          <p role="alert">
-            {(touched.paymentType || status === STATUS.SUBMITTED) &&
-              errors.paymentType}
-          </p>
-        </div>
-        <div className="form-group col-md-6">
-          <label htmlFor="nameOnCard">Name on card:</label>
-          <br />
-          <input
-            id="nameOnCard"
-            type="text"
-            value={payment.nameOnCard}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            size="35"
-          />
-          <br />
-          <p role="alert">
-            {(touched.nameOnCard || status === STATUS.SUBMITTED) &&
-              errors.nameOnCard}
-          </p>
-        </div>
-        <div className="form-group col-md-6">
-          <label htmlFor="cardNo">Card number:</label>
-          <br />
-          <InputMask
-            id="cardNo"
-            type="text"
-            value={payment.cardNo}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            maskplaceholder="_"
-            mask="9999-9999-9999-9999"
-            alwaysShowMask={true}
-            maskChar="_"
-            size="18"
-          />
-          <br />
-          <p role="alert">
-            {(touched.cardNo || status === STATUS.SUBMITTED) && errors.cardNo}
-          </p>
-        </div>
-        <div className="form-group col-md-6">
-          <label htmlFor="expiry">Expiry:</label>
-          <br />
-          <InputMask
-            id="expiry"
-            type="text"
-            value={payment.expiry}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            maskplaceholder="_"
-            mask="99/99"
-            alwaysShowMask={true}
-            maskChar="_"
-            size="3"
-          />
-          <br />
-          <p role="alert">
-            {(touched.expiry || status === STATUS.SUBMITTED) && errors.expiry}
-          </p>
-        </div>
-        <div className="form-group col-md-6">
-          <label htmlFor="csc">Card Security Number:</label>
-          <br />
-          <InputMask
-            id="csc"
-            type="text"
-            value={payment.csc}
-            onBlur={handleBlur}
-            onChange={handleChange}
-            maskplaceholder="_"
-            mask="999"
-            alwaysShowMask={true}
-            maskChar="_"
-            size="2"
-          />
-          <br />
-          <p role="alert">
-            {(touched.csc || status === STATUS.SUBMITTED) && errors.csc}
-          </p>
-        </div>
-        <div className="col-md-12">
-          <input
-            type="submit"
-            className="btn btn-primary"
-            value="Save Payment Info"
-            disabled={status === STATUS.SUBMITTING}
-          />
-        </div>
-      </form>
+      <section id="payment">
+        <form onSubmit={handleSubmit} className="row col-md-6">
+          <div className="form-group col-md-12">
+            <label htmlFor="paymentType">Payment Type</label>
+            <br />
+            <select
+              id="paymentType"
+              value={payment.paymentType}
+              onBlur={handleBlur}
+              onChange={handleChange}
+            >
+              <option value="">Select...</option>
+              <option value="PayPal">PayPal</option>
+              <option default value="CreditCard">
+                Credit Card
+              </option>
+            </select>
+            <p role="alert">
+              {(touched.paymentType || status === CHECKOUT_STATUS.PAYMENT_SUBMITTING) &&
+                errors.paymentType}
+            </p>
+          </div>
+          <div className="form-group col-md-6">
+            <label htmlFor="nameOnCard">Name on card:</label>
+            <br />
+            <input
+              id="nameOnCard"
+              type="text"
+              value={payment.nameOnCard}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              size="35"
+            />
+            <br />
+            <p role="alert">
+              {(touched.nameOnCard || status === CHECKOUT_STATUS.PAYMENT_SUBMITTING) &&
+                errors.nameOnCard}
+            </p>
+          </div>
+          <div className="form-group col-md-6">
+            <label htmlFor="cardNo">Card number:</label>
+            <br />
+            <InputMask
+              id="cardNo"
+              type="text"
+              value={payment.cardNo}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              maskplaceholder="_"
+              mask="9999-9999-9999-9999"
+              alwaysShowMask={true}
+              maskChar="_"
+              size="18"
+            />
+            <br />
+            <p role="alert">
+              {(touched.cardNo || status === CHECKOUT_STATUS.PAYMENT_SUBMITTING) && errors.cardNo}
+            </p>
+          </div>
+          <div className="form-group col-md-6">
+            <label htmlFor="expiry">Expiry:</label>
+            <br />
+            <InputMask
+              id="expiry"
+              type="text"
+              value={payment.expiry}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              maskplaceholder="_"
+              mask="99/99"
+              alwaysShowMask={true}
+              maskChar="_"
+              size="3"
+            />
+            <br />
+            <p role="alert">
+              {(touched.expiry || status === CHECKOUT_STATUS.PAYMENT_SUBMITTING) && errors.expiry}
+            </p>
+          </div>
+          <div className="form-group col-md-6">
+            <label htmlFor="csc">Card Security Number:</label>
+            <br />
+            <InputMask
+              id="csc"
+              type="text"
+              value={payment.csc}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              maskplaceholder="_"
+              mask="999"
+              alwaysShowMask={true}
+              maskChar="_"
+              size="2"
+            />
+            <br />
+            <p role="alert">
+              {(touched.csc || status === CHECKOUT_STATUS.PAYMENT_SUBMITTING) && errors.csc}
+            </p>
+          </div>
+          <div className="col-md-12">
+            <input
+              type="submit"
+              className="btn btn-primary"
+              value="Complete Order"
+              disabled={status === CHECKOUT_STATUS.PAYMENT_SUBMITTING}
+            />
+          </div>
+        </form>
+      </section>
     </>
   );
 }

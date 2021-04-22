@@ -59,8 +59,9 @@ export default function Cart() {
       <h1>
         {numItemsInCart === 0
           ? 'Your cart is empty'
-          : `${numItemsInCart} Item${numItemsInCart > 1 ? 's' : ''} in My Cart`}
+          : `${numItemsInCart} Item${numItemsInCart > 1 ? 's' : ''} in my cart`}
       </h1>
+      <p></p>
       <ul>{cart.map(renderItem)}</ul>
       {cart.length > 0 && (
         <button

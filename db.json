@@ -94,19 +94,14 @@
     {
       "id": 11,
       "category": "backpacks",
-      "image": "backpack1.jpg",
-      "name": "Orangy1",
+      "image": "juniortrek1.jpg",
+      "name": "Junior Trek",
       "price": 120.95,
       "skus": [
         {
           "sku": "b1",
           "size": "Medium",
           "skuDesc": "90 x 25 x 15 cm"
-        },
-        {
-          "sku": "b2",
-          "size": "Large",
-          "skuDesc": "100 x 35 x 25 cm"
         }
       ],
       "description": "This rugged bag will hold all your stuff."
@@ -114,7 +109,7 @@
     {
       "id": 12,
       "category": "backpacks",
-      "image": "backpack2.jpg",
+      "image": "tassled.jpg",
       "name": "Tasseled",
       "price": 195.95,
       "skus": [
@@ -134,7 +129,7 @@
     {
       "id": 13,
       "category": "backpacks",
-      "image": "backpack3.jpg",
+      "image": "tassled-pro.jpg",
       "name": "Tasseled-pro",
       "price": 225.95,
       "skus": [
@@ -153,161 +148,18 @@
     }
   ],
   "shippingAddress": [
-    {
-      "city": "",
-      "country": "Australia",
-      "name": "Andrew McAlister",
-      "email": "andrew_mcalister@hotmail.com",
-      "address1": "2 Pluto Place",
-      "citysuburb": "Hoppers Crossing",
-      "state": "VIC",
-      "address2": "",
-      "transId": "b85ec4b5-c9d0-460c-89f0-67c182178ca5",
-      "id": 1
-    },
-    {
-      "city": "",
-      "country": "Australia",
-      "name": "Andrew McAlister",
-      "email": "mkikuchi20@hotmail.com",
-      "address1": "2 pluto place",
-      "citysuburb": "HOPPERS CROSSING",
-      "state": "VIC",
-      "address2": "",
-      "transId": "b1144958-28e2-4bb8-a8fc-989373130003",
-      "id": 2
-    }
   ],
-  "payments": [],
+  "payments": [
+  ],
   "orders": [
-    {
-      "transId": "b85ec4b5-c9d0-460c-89f0-67c182178ca5",
-      "cart": [
-        {
-          "id": "11",
-          "sku": "b1",
-          "quantity": 1
-        },
-        {
-          "id": "2",
-          "sku": "28",
-          "quantity": 1
-        }
-      ],
-      "orderDate": "Mon Apr 19 2021 16:31:27 GMT+1000 (Australian Eastern Standard Time)",
-      "status": "PAYMENTPENDING",
-      "id": 1
-    },
-    {
-      "transId": "b1144958-28e2-4bb8-a8fc-989373130003",
-      "cart": [
-        {
-          "id": "1",
-          "sku": "17",
-          "quantity": 1
-        },
-        {
-          "id": "12",
-          "sku": "b3",
-          "quantity": 1
-        }
-      ],
-      "orderDate": "Wed Apr 21 2021 18:38:25 GMT+1000 (Australian Eastern Standard Time)",
-      "status": "PAYMENTPENDING",
-      "id": 2
-    }
   ],
   "tweets": [
     {
-      "name": "Steven",
-      "image": "Steven.jpg",
-      "date": 1618994167450,
-      "actionMessage": "Steven purchased a Climber shoe",
-      "id": 219
-    },
-    {
       "name": "Simon",
       "image": "Simon.jpg",
-      "date": 1618994202451,
-      "actionMessage": "Simon purchased a Climber-pro shoe",
-      "id": 226
-    },
-    {
-      "name": "Simon",
-      "image": "Simon.jpg",
-      "date": 1618994207455,
+      "date": 1619075459303,
       "actionMessage": "Simon purchased a Explorer shoe",
-      "id": 227
-    },
-    {
-      "name": "Mariko",
-      "image": "Mariko.jpg",
-      "date": 1618994212447,
-      "actionMessage": "Mariko purchased a Explorer shoe",
-      "id": 228
-    },
-    {
-      "name": "Simon",
-      "image": "Simon.jpg",
-      "date": 1618994217446,
-      "actionMessage": "Simon purchased a Climber shoe",
-      "id": 229
-    },
-    {
-      "name": "Steven",
-      "image": "Steven.jpg",
-      "date": 1618994222447,
-      "actionMessage": "Steven purchased a Tasseled backpack",
-      "id": 230
-    },
-    {
-      "name": "Simon",
-      "image": "Simon.jpg",
-      "date": 1618994227446,
-      "actionMessage": "Simon purchased a Hiker shoe",
-      "id": 231
-    },
-    {
-      "name": "Simon",
-      "image": "Simon.jpg",
-      "date": 1618994232447,
-      "actionMessage": "Simon purchased a Explorer shoe",
-      "id": 232
-    },
-    {
-      "name": "Simon",
-      "image": "Simon.jpg",
-      "date": 1618994237449,
-      "actionMessage": "Simon purchased a Explorer shoe",
-      "id": 233
-    },
-    {
-      "name": "Mariko",
-      "image": "Mariko.jpg",
-      "date": 1618994242448,
-      "actionMessage": "Mariko purchased a Climber shoe",
-      "id": 234
-    },
-    {
-      "name": "Andrew",
-      "image": "Andrew.jpg",
-      "date": 1618994328343,
-      "actionMessage": "Andrew purchased a Hiker shoe",
-      "id": 235
-    },
-    {
-      "name": "Mariko",
-      "image": "Mariko.jpg",
-      "date": 1618994343352,
-      "actionMessage": "Mariko purchased a Orangy1 backpack",
-      "id": 236
-    },
-    {
-      "name": "Andrew",
-      "image": "Andrew.jpg",
-      "date": 1618994876447,
-      "actionMessage": "Andrew purchased a Climber shoe",
-      "id": 237
+      "id": 340
     }
   ]
 }

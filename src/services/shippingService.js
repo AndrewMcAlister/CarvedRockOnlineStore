@@ -1,13 +1,14 @@
 const baseUrl = process.env.REACT_APP_API_BASE_URL;
 
 export async function getShippingAddress(transId) {
-  return fetch(baseUrl + 'shippingAddress/' + transId).then((response) => {
-    if (response.ok) return response.json();
+  const response = await fetch(baseUrl + 'shippingAddress/' + transId);
+  if (response.ok)
+    return await response.json();
+  else
     throw response;
-  });
 }
 
-export async function saveShippingAddress(address) {
+export async function saveShippingAddress(address) {  
   return fetch(baseUrl + 'shippingAddress', {
     method: 'POST',
     headers: {

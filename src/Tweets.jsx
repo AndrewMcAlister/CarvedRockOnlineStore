@@ -22,12 +22,12 @@ export default function Tweets() {
   },[])
 
   useEffect(() => {
-    const intervalDeleteTweets = setInterval(() => deleteOldTweets(3),30000); //in a real situation, this would be a back-end job, but I only have json-server in this example
+    const intervalDeleteTweets = setInterval(() => deleteOldTweets(200),30000); //in a real situation, this would be a back-end job, but I only have json-server in this example
     return () => clearInterval(intervalDeleteTweets);
   },[]);
 
   useEffect(() => {
-    const intervalCreateTweet = setInterval(() => createRandomTweet(products), 15000);
+    const intervalCreateTweet = setInterval(() => createRandomTweet(products), 5000);
     return () => clearInterval(intervalCreateTweet);
   }, [products]);
 
