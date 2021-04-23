@@ -21,11 +21,12 @@ export default function LandingPage() {
                 <li>Added payment information capture and validation</li>
                 <li>
                   Added SWR caching, and a 1 sec delay to product
-                  retrieval to show highligh caching (but not on cart).
+                  retrieval to show highlight caching (but not on cart).
                 </li>
                 <li>Added random customer purchase tweets.</li>
                 <li>Added semi-transparent header background.</li>
-                <li>Adjusted css of all pages</li>
+                <li>Adjusted css of all pages.</li>
+                <li>Json server is really only for api development, and fails eventually due to a delete bug, but good enough for this demo.</li>
               </ul>
             </h3>
           </section>

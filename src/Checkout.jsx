@@ -43,9 +43,7 @@ export default function Checkout() {
     'countries',
   );
 
-  useEffect(() => localStorage.setItem('address', JSON.stringify(address)), [
-    address,
-  ]);
+  useEffect(() => localStorage.setItem('address', JSON.stringify(address)), [address]);
 
   function handleChange(e) {
     e.persist(); // persist the event

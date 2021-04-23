@@ -12,7 +12,6 @@ export async function savePayment(payment) {
     let existing = await getPaymentByTransId(payment.transId);
     console.log(JSON.stringify(existing));
     if (!existing||existing.length===0) {  
-      debugger;    
       //payment is sent to back-end api and is successful, now clear card no (except last 4 digits) and save payment
       payment.cardNo = payment.cardNo.slice(-4);
       payment.success = true;
